@@ -509,6 +509,18 @@ nav .navcall{height:46px;box-sizing:border-box;display:inline-flex;align-items:c
 }
 @media(min-width:1241px){nav .navcall{white-space:nowrap;flex-shrink:0;padding:0 16px!important;gap:6px}nav .navcall *{white-space:nowrap}nav .brand svg{flex:0 0 22px;width:22px;height:22px}nav .links>a,nav .dd>button{padding:0 14px!important;font-size:15px!important;min-width:68px}nav .links{gap:9px!important}}
 @media(min-width:1500px){nav .links>a,nav .dd>button{padding:0 20px!important;font-size:17px!important;height:50px}nav .brand,nav .navcall{height:50px}nav .links{gap:12px!important}}
+
+#callbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(15,10,40,.62);backdrop-filter:blur(4px);padding:16px}
+#callbox.on{display:flex}
+#callbox .cb{width:min(440px,100%);background:#fff;border-radius:22px;padding:26px 22px 22px;text-align:center;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);position:relative}
+#callbox h3{margin:0 0 4px;font:800 24px 'Hind Siliguri',sans-serif;color:#171233}
+#callbox p{margin:0 0 16px;color:#5a5478;font-size:15px}
+#callbox .num{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,#eef5ff,#f6eeff);border:2px solid #d8d0f5}
+#callbox .num b{font:700 21px 'Rajdhani',sans-serif;color:#1769c2;letter-spacing:.02em}
+#callbox .num button,#callbox .wab{border:0;cursor:pointer;font:700 14px 'Hind Siliguri',sans-serif;color:#fff;border-radius:12px;padding:10px 16px;background:linear-gradient(135deg,#ff8a3d,#ff3d8b);box-shadow:0 4px 0 #b8264f}
+#callbox .wab{display:block;text-decoration:none;margin-top:12px;padding:13px;font-size:16px;background:linear-gradient(135deg,#1ebe5d,#2fe07a);box-shadow:0 4px 0 #0f7f3c}
+#callbox .x{position:absolute;top:10px;right:12px;border:0;background:none;font-size:26px;cursor:pointer;color:#6b6590}
+#callbox button .bn,#callbox button .en{color:#fff!important;font-size:14px!important;display:inline!important}#callbox button .en{margin-left:5px}body[data-l=bn] #callbox button .en,body[data-l=en] #callbox button .bn{display:none!important}
 </style>
 </head>
 <body data-l="both">
@@ -804,6 +816,7 @@ nav .navcall{height:46px;box-sizing:border-box;display:inline-flex;align-items:c
 
 <div class="bot" id="bot"><button class="bot-btn" id="botBtn" aria-label="Ask a question"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg><span class="bn">প্রশ্ন করুন</span><span class="en">Ask us</span></button>
 <div class="bot-win" role="dialog" aria-label="Assistant"><div class="bot-h"><div><b>Core Assistant</b><small><span class="bn">লিফট, এসকেলেটর, AVR ও সিভিল নিয়ে প্রশ্ন করুন</span><span class="en">Ask about lifts, escalators, AVR and civil work</span></small></div><button id="botX" aria-label="Close">×</button></div><div class="msgs" id="msgs"></div><div class="chips2" id="chips2"></div><form class="bform" id="botForm"><input id="botIn" autocomplete="off" placeholder="প্রশ্ন লিখুন… / Type your question…"><button type="submit" aria-label="Send">➤</button></form></div></div>
+<div id="callbox" role="dialog" aria-modal="true" aria-label="Call"><div class="cb"><button class="x" type="button" aria-label="Close">×</button><h3><span class="bn">কল করুন</span><span class="en">Call us</span></h3><p><span class="bn">কম্পিউটারে সরাসরি কল হয় না — মোবাইল থেকে এই নম্বরে কল করুন বা কপি করুন।</span><span class="en">A computer can't place calls directly — dial this number from your phone, or copy it.</span></p><div class="num"><b>+880 1745 176328</b><button type="button" data-copy="+8801745176328"><span class="bn">কপি</span><span class="en">Copy</span></button></div><div class="num"><b>+880 1712 753732</b><button type="button" data-copy="+8801712753732"><span class="bn">কপি</span><span class="en">Copy</span></button></div><a class="wab wa" id="cbwa" target="_blank" rel="noopener">WhatsApp</a></div></div>
 <div class="fab"><a class="wa" hidden target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.6-4.7A8.5 8.5 0 1 1 8 19.5L3 21z"/></svg></a><a class="call" href="tel:+8801745176328" aria-label="Call"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a></div>
 <figure id="lb" hidden><img alt=""><figcaption></figcaption></figure>
 <script>
@@ -977,6 +990,21 @@ document.getElementById('botBtn').addEventListener('click',()=>{botEl.classList.
   if(botEl.classList.contains('open')){chips();if(!greeted){greeted=true;const lg=pick('');const g=KB[0];say(lg==='en'?g.en:lg==='bn'?g.bn:g.bn+'\n\n'+g.en,'b')}inp.focus()}});
 document.getElementById('botX').addEventListener('click',()=>botEl.classList.remove('open'));
 document.getElementById('botForm').addEventListener('submit',e=>{e.preventDefault();ask(inp.value)});
+
+// ---- Call buttons: phones dial directly; computers show a number box (no more Google opening) ----
+(function(){
+ const mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&matchMedia('(pointer:coarse)').matches);
+ const box=document.getElementById('callbox');if(!box)return;
+ const wa=document.getElementById('cbwa');
+ if(CONFIG.whatsapp){wa.href='https://wa.me/'+CONFIG.whatsapp;wa.hidden=false}else wa.hidden=true;
+ const close=()=>box.classList.remove('on');
+ box.addEventListener('click',e=>{if(e.target===box||e.target.classList.contains('x'))close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ box.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy,old=b.innerHTML,done=()=>{b.textContent='✓';setTimeout(()=>b.innerHTML=old,1200)};
+  try{navigator.clipboard.writeText(t).then(done,done)}catch(_){done()}}));
+ if(!mobile)document.querySelectorAll('a[href^="tel:"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();box.classList.add('on')}));
+})();
 </script>
 </body>
 </html>
